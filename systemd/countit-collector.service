@@ -5,6 +5,7 @@ After=graphical-session.target
 [Service]
 Type=simple
 Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/camilla/.Xauthority
 ExecStart=/home/camilla/enviros/countit_env/bin/countit collect --database /home/camilla/.local/share/countit/countit.db
 Restart=on-failure
 RestartSec=5
