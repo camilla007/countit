@@ -1,0 +1,13 @@
+[Unit]
+Description=CountIt aggregate-only X11 typing telemetry
+After=graphical-session.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/home/camilla/enviros/countit_env/bin/countit collect --database /home/camilla/.local/share/countit/countit.db
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,15 @@
+# Virtual environment and generated state
+bin/
+include/
+lib/
+lib64
+pyvenv.cfg
+share/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+countit.db
+*.sqlite3
+*.egg-info/
+.venv/
