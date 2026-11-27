@@ -1,14 +1,18 @@
 [Unit]
 Description=CountIt aggregate-only X11 typing telemetry
+PartOf=graphical-session.target
 After=graphical-session.target
 
 [Service]
 Type=simple
-Environment=DISPLAY=:0
-Environment=XAUTHORITY=/home/camilla/.Xauthority
-ExecStart=/home/camilla/enviros/countit_env/bin/countit collect --database /home/camilla/.local/share/countit/countit.db
+# Assumes pipx's default executable location; review `command -v countit` first.
+# Import DISPLAY and XAUTHORITY from your X11 session; do not guess their values.
+ExecStart=%h/.local/bin/countit collect
 Restart=on-failure
 RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+LimitCORE=0
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

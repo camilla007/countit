@@ -1,20 +1,59 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "countit"
-version = "0.1.0"
-description = "Local-only aggregate typing telemetry for X11"
+dynamic = ["version"]
+description = "Local-only aggregate typing telemetry for X11. Your keyboard has said enough."
+readme = "README.md"
 requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Camilla Buys"}]
+keywords = ["typing", "x11", "telemetry", "privacy", "wpm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: X11 Applications",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
 dependencies = ["python-xlib>=0.33"]
 
+[project.urls]
+Homepage = "https://github.com/camilla007/countit"
+Source = "https://github.com/camilla007/countit"
+Issues = "https://github.com/camilla007/countit/issues"
+Changelog = "https://github.com/camilla007/countit/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["build>=1.2", "pytest>=8", "ruff>=0.9", "twine>=6.1"]
 
 [project.scripts]
 countit = "countit.cli:main"
 
+[tool.setuptools.dynamic]
+version = {attr = "countit.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["countit*"]
+
+[tool.setuptools.package-data]
+countit = ["data/*.service"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
